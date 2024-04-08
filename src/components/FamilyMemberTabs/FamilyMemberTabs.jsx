@@ -1,6 +1,16 @@
+import { Link } from "react-router-dom";
+
 const FamilyMemberTabs = () => {
   return (
-    <div>FamilyMemberTabs</div>
+    <div className="container">
+      <ul className="list-none">
+        <li>
+          <Link className="item" to="">
+            Noella
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 
