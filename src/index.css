@@ -1,7 +1,6 @@
-/*
-Ajánlott CSS beállítások (nyugodtan kitörölheted, ha más megoldásokat szeretnél használni)
-További információ: https://www.joshwcomeau.com/css/custom-css-reset/
-*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*
   1. Use a more-intuitive box-sizing model.
