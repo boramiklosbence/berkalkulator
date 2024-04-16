@@ -3,9 +3,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.formatOnSave": false
-  },
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.tabWidth": 2,
-  "prettier.trailingComma": "all"
+  }
 }
