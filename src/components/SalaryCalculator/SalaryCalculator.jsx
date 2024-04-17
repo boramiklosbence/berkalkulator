@@ -3,10 +3,10 @@ import { FaTrash as DeleteIcon } from "react-icons/fa";
 const SalaryCalculator = () => {
   return (
     <div className="mb-2 flex justify-center">
-      <div className="w-1/2 rounded border border-black bg-gray-200 p-4">
+      <div className="w-1/2 rounded-lg border border-gray-300 bg-gray-200 p-4">
         <div class="flex items-start justify-between">
           <p className="text-lg font-bold uppercase">Noella bérének a kiszámítása</p>
-          <button type="button" className="h-10 rounded border border-black px-4 py-2 hover:bg-white">
+          <button type="button" className="h-10 rounded-lg border border-gray-300 px-4 py-2 hover:bg-white">
             <DeleteIcon />
           </button>
         </div>
@@ -48,16 +48,16 @@ const SalaryCalculator = () => {
           />
           {/* Submit button input */}
           <div className="flex items-center justify-center justify-items-center gap-x-1">
-            <button type="button" className="h-10 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+            <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
               -1%
             </button>
-            <button type="button" className="h-10 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+            <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
               -5%
             </button>
-            <button type="button" className="h-10 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+            <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
               +1%
             </button>
-            <button type="button" className="h-10 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+            <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
               +5%
             </button>
           </div>
@@ -68,7 +68,7 @@ const SalaryCalculator = () => {
               id="default-checkbox-1"
               type="checkbox"
               value=""
-              className="h-4 w-4 rounded border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <label htmlFor="default-checkbox-1" className="ms-2 text-black">
               25 év alattiak SZJA mentessége
@@ -79,7 +79,7 @@ const SalaryCalculator = () => {
               id="checked-checkbox-2"
               type="checkbox"
               value=""
-              className="h-4 w-4 rounded border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <label htmlFor="checked-checkbox-2" className="ms-2 text-black">
               Friss házasok kedvezménye
@@ -90,7 +90,7 @@ const SalaryCalculator = () => {
               id="default-checkbox-3"
               type="checkbox"
               value=""
-              className="h-4 w-4 rounded border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <label htmlFor="default-checkbox-3" className="ms-2 text-black">
               Személyi adókedvezmény
@@ -101,7 +101,7 @@ const SalaryCalculator = () => {
               id="default-checkbox-4"
               type="checkbox"
               value=""
-              className="h-4 w-4 rounded border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <label htmlFor="default-checkbox-4" className="ms-2 text-black">
               Családi kedvezmény
@@ -110,7 +110,7 @@ const SalaryCalculator = () => {
         </form>
         <p className="text-center text-lg font-bold">Számított nettó bér:</p>
         <div className="text-center">
-          <p className="inline-block w-1/4 rounded border border-black px-4 py-2 text-xl font-bold">250.000 Ft</p>
+          <p className="inline-block w-1/4 rounded-lg border border-gray-300 px-4 py-2 text-xl font-bold">250.000 Ft</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 const HouseholdSummary = () => {
   return (
     <div className="mb-2 flex justify-center">
-      <div className="w-1/2 rounded border border-black bg-gray-200 p-4">
+      <div className="w-1/2 rounded-lg border border-gray-300 bg-gray-200 p-4">
         <p className="mb-2 text-lg font-bold uppercase">Háztartás összesített jövedelme</p>
         <table className="w-full text-left text-sm text-black">
           <thead className="bg-gray-50 text-xs uppercase">
