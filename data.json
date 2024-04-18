@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Noella",
+    "grossSalary": "250000",
+    "netSalary": "210000",
+    "isYoungAdult": "false",
+    "isMarried": "false",
+    "isEligibleForTaxAllowance": "false",
+    "isEligibleForFamilyTaxAllowance": "false"
+  },
+  {
+    "id": 2,
+    "name": "Ethan",
+    "grossSalary": "180000",
+    "netSalary": "150000",
+    "isYoungAdult": "true",
+    "isMarried": "true",
+    "isEligibleForTaxAllowance": "true",
+    "isEligibleForFamilyTaxAllowance": "true"
+  },
+  {
+    "id": 3,
+    "name": "Sophia",
+    "grossSalary": "200000",
+    "netSalary": "170000",
+    "isYoungAdult": "false",
+    "isMarried": "true",
+    "isEligibleForTaxAllowance": "true",
+    "isEligibleForFamilyTaxAllowance": "true"
+  },
+  {
+    "id": 4,
+    "name": "Liam",
+    "grossSalary": "220000",
+    "netSalary": "190000",
+    "isYoungAdult": "true",
+    "isMarried": "false",
+    "isEligibleForTaxAllowance": "false",
+    "isEligibleForFamilyTaxAllowance": "false"
+  },
+  {
+    "id": 5,
+    "name": "Ava",
+    "grossSalary": "190000",
+    "netSalary": "160000",
+    "isYoungAdult": "true",
+    "isMarried": "false",
+    "isEligibleForTaxAllowance": "true",
+    "isEligibleForFamilyTaxAllowance": "false"
+  },
+  {
+    "id": 6,
+    "name": "Jackson",
+    "grossSalary": "240000",
+    "netSalary": "200000",
+    "isYoungAdult": "false",
+    "isMarried": "true",
+    "isEligibleForTaxAllowance": "true",
+    "isEligibleForFamilyTaxAllowance": "true"
+  },
+  {
+    "id": 7,
+    "name": "Olivia",
+    "grossSalary": "210000",
+    "netSalary": "180000",
+    "isYoungAdult": "false",
+    "isMarried": "false",
+    "isEligibleForTaxAllowance": "true",
+    "isEligibleForFamilyTaxAllowance": "true"
+  }
+]

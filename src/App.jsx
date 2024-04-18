@@ -1,10 +1,13 @@
 import HouseholdSalaryCalculator from "./components/HouseholdSalaryCalculator";
+import { FamilyMemberProvider } from "./contexts/UserContaxt";
 
 function App() {
   return (
-    <div>
-      <HouseholdSalaryCalculator />
-    </div>
+    <FamilyMemberProvider>
+      <div>
+        <HouseholdSalaryCalculator />
+      </div>
+    </FamilyMemberProvider>
   );
 }
 
