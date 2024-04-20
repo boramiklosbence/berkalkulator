@@ -1,5 +1,5 @@
 import HouseholdSalaryCalculator from "./components/HouseholdSalaryCalculator";
-import { FamilyMemberProvider } from "./contexts/UserContaxt";
+import { FamilyMemberProvider } from "./contexts/FamilyMemberContext";
 
 function App() {
   return (

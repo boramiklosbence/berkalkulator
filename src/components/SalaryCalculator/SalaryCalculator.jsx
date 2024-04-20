@@ -1,11 +1,14 @@
 import { FaTrash as DeleteIcon } from "react-icons/fa";
+import { useFamilyMember } from "../../contexts/FamilyMemberContext";
 
 const SalaryCalculator = () => {
+  const familyMemberContext = useFamilyMember();
+
   return (
     <div className="mb-2 flex justify-center">
       <div className="w-1/2 rounded-lg border border-gray-300 bg-gray-200 p-4">
         <div class="flex items-start justify-between">
-          <p className="text-lg font-bold uppercase">Noella bérének a kiszámítása</p>
+          <p className="text-lg font-bold uppercase">{familyMemberContext.selectedFamilyMember.name} bérének a kiszámítása</p>
           <button type="button" className="h-10 rounded-lg border border-gray-300 px-4 py-2 hover:bg-white">
             <DeleteIcon />
           </button>
@@ -21,7 +24,7 @@ const SalaryCalculator = () => {
               id="name"
               className="block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-black focus:border-blue-500 focus:ring-blue-500"
               placeholder=""
-              defaultValue={"Noella"}
+              value={familyMemberContext.selectedFamilyMember.name}
             />
           </div>
           {/* Salary input */}
@@ -34,7 +37,7 @@ const SalaryCalculator = () => {
               id="name"
               className="block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-black focus:border-blue-500 focus:ring-blue-500"
               placeholder=""
-              value={250000}
+              value={familyMemberContext.selectedFamilyMember.grossSalary}
             />
           </div>
           {/* Salary slider input */}
