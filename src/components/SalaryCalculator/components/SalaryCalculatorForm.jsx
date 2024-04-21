@@ -1,126 +1,184 @@
-import React, { useState } from "react";
-import TextInput from "./TextInput";
+import React, { useEffect, useState } from "react";
+import SalaryTextInput from "./SalaryTextInput.jsx";
+import SalarySliderInput from "./SalarySliderInput.jsx";
 
 const defaultState = {
   id: 1,
   name: "Noella",
-  grossSalary: "",
-  netSalary: "",
-  isYoungAdult: "false",
-  isMarried: "false",
-  isEligibleForTaxAllowance: "false",
-  isEligibleForFamilyTaxAllowance: "false"
+  grossSalary: 0,
+  netSalary: 0,
+  isYoungAdult: false,
+  isMarried: false,
+  isEligibleForTaxAllowance: false,
+  isEligibleForFamilyTaxAllowance: false
 };
 
 const SalaryCalculatorForm = () => {
   const [formState, setFormState] = useState(defaultState);
 
+  // HANDLERS
+  const handleButtonClick = (key, percentage) => {
+    const value = formState[key];
+    const newValue = Math.round(value * (1 + percentage / 100));
+
+    setFormState({
+      ...formState,
+      [key]: newValue
+    });
+  };
+
+  const handleCheckboxInput = key => {
+    const value = formState[key];
+
+    setFormState({
+      ...formState,
+      [key]: !value
+    });
+  };
+
   /*
-    useEffect(() => {
-        if (edit) setFormState(edit);
-    }, [edit]);
+    [checkbox] - 25 éven aluliak SZJA kedvezménye
+    25 év alatt és bruttó max 499 952 Ft-ig érvényes
+    Tehát ha valakinek a bruttó jövedelme 500 000 Ft, 499 952 Ft-ig a jövedelme SZJA mentes, 
+    felette viszont a maradék 48 Ft után fizetnie kell a 15%-os jövedelemadót, 
+    így tehát a maradék 48 Ft-ból ezt le kell vonni a nettó kiszámításánál
 
-    const handleSave = () => {
-        if (edit === null) {
-        let maxid = 0;
-        for (let i = 0; i < tracks.length; i++) {
-            if (maxii < tracks[i].id) maxid = tracks[i].id;
-        }
-        setTracks([{ ...formState, id: ++maxid }, ...tracks]);
-        } else {
-            const ind = tracks.findIndex(e => e.id === formState.id);
-            setTracks([...tracks.slice(0, ind), formState, ...tracks.slice(ind + 1)]);
-        }
-
-        setOpen(false);
-        setEdit(null);
-        };
-    }
+    [checkbox] - Személyi adókedvezmény
+    Az adóelőleg alapja jogosultsági hónaponként a minimálbér egyharmadának száz forintra kerekített összegével,
+    azaz 2023-ban havi 77 300 forinttal csökkenthető. Tehát ez szintén egy checkbox legyen,
+    ahol az összes kiszámolt adót további 77 300 Ft-tal csökkentitek, ez egy fix kivonás a bejelölés esetén.
+    Ha a 77 300 Ft több lenne, mint amennyi adót összesen fizet a megadott személy,
+    természetesen nem lesz "plusz bevétele" ebből. 60 000 Ft adó fizetése esetén a maradék 17 300 Ft "elveszik".
   */
+
+  // COMPONENT
+  useEffect(() => {
+    let value = formState["grossSalary"];
+    let tax = 0;
+
+
+
+    if(formState.isYoungAdult && value > 499_952) {
+      const temp = value - 499_952;
+      value = 499_952 + (temp * 0.85);
+    }
+
+    setFormState({
+      ...formState,
+      netSalary: value
+    });
+  }, [
+    formState.grossSalary,
+    formState.isYoungAdult,
+    formState.isMarried,
+    formState.isEligibleForTaxAllowance,
+    formState.isEligibleForFamilyTaxAllowance
+  ]);
 
   return (
     <div>
-      <TextInput label="Családtag neve" name="name" formState={formState} setFormState={setFormState} />
-      <TextInput label="Bruttó bér" name="grossSalary" formState={formState} setFormState={setFormState} />
-
-      {/* Salary slider input */}
-      <input
-        type="range"
-        className="transparent mb-4 h-2 w-full cursor-pointer appearance-none rounded-lg border border-gray-300 text-blue-500"
-        id="customRange1"
-        min="1"
-        max="100"
-        step="1"
+      <SalaryTextInput
+        label="Családtag neve"
+        name="name"
+        formState={formState}
+        setFormState={setFormState}
       />
-      {/* Submit button input */}
+      <SalaryTextInput
+        label="Bruttó bér"
+        name="grossSalary"
+        formState={formState}
+        setFormState={setFormState}
+      />
+      <SalarySliderInput
+        min={0}
+        max={1_000_000}
+        step={1}
+        name="grossSalary"
+        formState={formState}
+        setFormState={setFormState}
+      />
       <div className="flex items-center justify-center justify-items-center gap-x-1">
-        <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={() => handleButtonClick("grossSalary", -1)}
+        >
           -1%
         </button>
-        <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={() => handleButtonClick("grossSalary", -5)}
+        >
           -5%
         </button>
-        <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={() => handleButtonClick("grossSalary", 1)}
+        >
           +1%
         </button>
-        <button type="button" className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="h-10 rounded-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={() => handleButtonClick("grossSalary", 5)}
+        >
           +5%
         </button>
       </div>
-      {/* Discounts */}
       <p className="font-bold uppercase">Kedvezmények</p>
       <div className="mb-2 flex items-center">
         <input
-          id="default-checkbox-1"
           type="checkbox"
-          value=""
+          name="isYoungAdult"
           className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+          checked={formState["isYoungAdult"] === true}
+          onChange={() => handleCheckboxInput("isYoungAdult")}
         />
-        <label htmlFor="default-checkbox-1" className="ms-2 text-black">
+        <label htmlFor="isYoungAdult" className="ms-2 text-black">
           25 év alattiak SZJA mentessége
         </label>
       </div>
       <div className="mb-2 flex items-center">
         <input
-          id="checked-checkbox-2"
           type="checkbox"
-          value=""
+          name="isMarried"
           className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+          checked={formState["isMarried"] === true}
+          onChange={() => handleCheckboxInput("isMarried")}
         />
-        <label htmlFor="checked-checkbox-2" className="ms-2 text-black">
+        <label htmlFor="isMarried" className="ms-2 text-black">
           Friss házasok kedvezménye
         </label>
       </div>
       <div className="mb-2 flex items-center">
         <input
-          id="default-checkbox-3"
           type="checkbox"
-          value=""
+          name="isEligibleForTaxAllowance"
           className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+          checked={formState["isEligibleForTaxAllowance"] === true}
+          onChange={() => handleCheckboxInput("isEligibleForTaxAllowance")}
         />
-        <label htmlFor="default-checkbox-3" className="ms-2 text-black">
+        <label htmlFor="isEligibleForTaxAllowance" className="ms-2 text-black">
           Személyi adókedvezmény
         </label>
       </div>
       <div className="mb-2 flex items-center">
         <input
-          id="default-checkbox-4"
           type="checkbox"
-          value=""
+          name="isEligibleForFamilyTaxAllowance"
           className="h-4 w-4 rounded-lg border border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-500"
+          checked={formState["isEligibleForFamilyTaxAllowance"] === true}
+          onChange={() => handleCheckboxInput("isEligibleForFamilyTaxAllowance")}
         />
-        <label htmlFor="default-checkbox-4" className="ms-2 text-black">
+        <label htmlFor="isEligibleForFamilyTaxAllowance" className="ms-2 text-black">
           Családi kedvezmény
         </label>
       </div>
-      <div className="w-2/12 text-center align-bottom">
-        <button onClick={handleSave} className="btn btn-primary flex-center mr-2 mt-5 flex w-20 p-2  font-bold">
-          Save
-        </button>
-      </div>
+      <h1>{formState.netSalary}</h1>
     </div>
-  )
-    ;
+  );
 };
 
 export default SalaryCalculatorForm;

@@ -21,12 +21,11 @@ const FamilyMemberProvider = ({ children }) => {
   const [familyMembers, setFamilyMembers] = useState([DEFAULT_FAMILY_MEMBER]);
   const [selectedFamilyMember, setSelectedFamilyMember] = useState(DEFAULT_FAMILY_MEMBER);
 
-  /*
-    const toggleTheme = () => {
-      setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
-    };
-  */
-  return <FamilyMemberContext.Provider value={{ familyMembers, selectedFamilyMember }}>{children}</FamilyMemberContext.Provider>;
+  return (
+    <FamilyMemberContext.Provider value={{ familyMembers, selectedFamilyMember }}>
+      {children}
+    </FamilyMemberContext.Provider>
+  );
 };
 
 export { FamilyMemberProvider, useFamilyMember };

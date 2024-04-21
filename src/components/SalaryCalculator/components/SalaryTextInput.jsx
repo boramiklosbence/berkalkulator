@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextInput = ({ label, name, formState, setFormState }) => {
+const SalaryTextInput = ({ label, name, formState, setFormState }) => {
   const handleInput = e => {
     setFormState({
       ...formState,
@@ -10,7 +10,7 @@ const TextInput = ({ label, name, formState, setFormState }) => {
 
   return (
     <div className="mb-2 w-full">
-      <label htmlFor="name" className="mb-1 block font-bold text-black">
+      <label htmlFor={name} className="mb-1 block font-bold text-black">
         {label}
       </label>
       <input
@@ -24,4 +24,4 @@ const TextInput = ({ label, name, formState, setFormState }) => {
   );
 };
 
-export default TextInput;
+export default SalaryTextInput;

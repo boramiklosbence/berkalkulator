@@ -4,9 +4,7 @@ import { FamilyMemberProvider } from "./contexts/FamilyMemberContext";
 function App() {
   return (
     <FamilyMemberProvider>
-      <div>
-        <HouseholdSalaryCalculator />
-      </div>
+      <HouseholdSalaryCalculator />
     </FamilyMemberProvider>
   );
 }
