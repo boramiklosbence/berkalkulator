@@ -19,18 +19,18 @@ const HouseholdSummary = () => {
             </tr>
           </thead>
           <tbody>
-          {familyMembers.map((familyMember, index) => {
-            return (
-              <tr key={index} className="border-b bg-white">
-                <td className="whitespace-nowrap px-6 py-4 font-medium">{familyMember.name}</td>
-                <td className="px-6 py-4">{familyMember.netSalary}</td>
-              </tr>
-            )
-          })}
-          <tr className="border-b bg-white">
-            <td className="whitespace-nowrap px-6 py-4 font-medium">Összesen:</td>
-            <td className="px-6 py-4">0</td>
-          </tr>
+            {familyMembers.map((familyMember, index) => {
+              return (
+                <tr key={index} className="border-b bg-white">
+                  <td className="whitespace-nowrap px-6 py-4 font-medium">{familyMember.name}</td>
+                  <td className="px-6 py-4">{familyMember.netSalary}</td>
+                </tr>
+              );
+            })}
+            <tr className="border-b bg-white">
+              <td className="whitespace-nowrap px-6 py-4 font-medium">Összesen:</td>
+              <td className="px-6 py-4">0</td>
+            </tr>
           </tbody>
         </table>
       </div>
