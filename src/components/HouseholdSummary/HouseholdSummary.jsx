@@ -1,4 +1,8 @@
+import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
+
 const HouseholdSummary = () => {
+  const { familyMembers } = useFamilyMember();
+
   return (
     <div className="mb-2 flex justify-center">
       <div className="w-1/2 rounded-lg border border-gray-300 bg-gray-200 p-4">
@@ -15,18 +19,18 @@ const HouseholdSummary = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b bg-white">
-              <td className="whitespace-nowrap px-6 py-4 font-medium">Apple MacBook Pro 17"</td>
-              <td className="px-6 py-4">Silver</td>
-            </tr>
-            <tr className="border-b bg-white">
-              <td className="whitespace-nowrap px-6 py-4 font-medium">Microsoft Surface Pro</td>
-              <td className="px-6 py-4">White</td>
-            </tr>
-            <tr className="bg-white">
-              <td className="whitespace-nowrap px-6 py-4 font-medium">Magic Mouse 2</td>
-              <td className="px-6 py-4">Black</td>
-            </tr>
+          {familyMembers.map((familyMember, index) => {
+            return (
+              <tr key={index} className="border-b bg-white">
+                <td className="whitespace-nowrap px-6 py-4 font-medium">{familyMember.name}</td>
+                <td className="px-6 py-4">{familyMember.netSalary}</td>
+              </tr>
+            )
+          })}
+          <tr className="border-b bg-white">
+            <td className="whitespace-nowrap px-6 py-4 font-medium">Összesen:</td>
+            <td className="px-6 py-4">0</td>
+          </tr>
           </tbody>
         </table>
       </div>
