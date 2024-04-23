@@ -2,7 +2,7 @@ import { FaPlus as PlusIcon } from "react-icons/fa";
 import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
 
 const FamilyMemberTabs = () => {
-  const { familyMembers } = useFamilyMember()
+  const { familyMembers, addFamilyMember } = useFamilyMember()
 
   return (
     <div className="m-2 flex flex-nowrap items-center justify-center gap-x-1">
@@ -18,7 +18,7 @@ const FamilyMemberTabs = () => {
           Button
         </button>
       */}
-      <button type="button" className="h-10 rounded-lg border border-gray-300 bg-gray-200 px-4 py-2 text-black  hover:bg-white hover:py-0">
+      <button type="button" className="h-10 rounded-lg border border-gray-300 bg-gray-200 px-4 py-2 text-black  hover:bg-white hover:py-0" onClick={() => addFamilyMember()}>
         <PlusIcon />
       </button>
     </div>

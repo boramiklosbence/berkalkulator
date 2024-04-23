@@ -23,7 +23,7 @@ const HouseholdSummary = () => {
               return (
                 <tr key={index} className="border-b bg-white">
                   <td className="whitespace-nowrap px-6 py-4 font-medium">{familyMember.name}</td>
-                  <td className="px-6 py-4">{familyMember.netSalary}</td>
+                  <td className="px-6 py-4">{familyMember.grossSalary}</td>
                 </tr>
               );
             })}

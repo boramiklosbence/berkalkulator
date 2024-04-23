@@ -7,76 +7,76 @@ import SalarySliderInput from "./components/SalarySliderInput.jsx";
 import SalaryTextInput from "./components/SalaryTextInput.jsx";
 
 const SalaryCalculator = () => {
-  const { selectedFamilyMember, setSelectedFamilyMember } = useFamilyMember();
+  const { getSelectedFamilyMember, updateSelectedFamilyMember, deleteSelectedFamilyMember } = useFamilyMember();
 
   useEffect(() => {
-    let value = selectedFamilyMember.grossSalary;
+    let value = getSelectedFamilyMember().grossSalary;
 
-    setSelectedFamilyMember({
-      ...selectedFamilyMember,
+    updateSelectedFamilyMember({
+      ...getSelectedFamilyMember(),
       netSalary: value
     });
   }, [
-    selectedFamilyMember.grossSalary,
-    selectedFamilyMember.isYoungAdult,
-    selectedFamilyMember.isMarried,
-    selectedFamilyMember.isEligibleForTaxAllowance,
-    selectedFamilyMember.isEligibleForFamilyTaxAllowance
+    getSelectedFamilyMember().grossSalary,
+    getSelectedFamilyMember().isYoungAdult,
+    getSelectedFamilyMember().isMarried,
+    getSelectedFamilyMember().isEligibleForTaxAllowance,
+    getSelectedFamilyMember().isEligibleForFamilyTaxAllowance
   ]);
 
   return (
     <div className="mb-2 flex justify-center">
       <div className="w-1/2 rounded-lg border border-gray-300 bg-gray-200 p-4">
         <div className="flex items-start justify-between">
-          <p className="text-lg font-bold uppercase">{selectedFamilyMember.name} bérének a kiszámítása</p>
-          <button type="button" className="h-10 rounded-lg border border-gray-300 px-4 py-2 hover:bg-white">
+          <p className="text-lg font-bold uppercase">{getSelectedFamilyMember.name} bérének a kiszámítása</p>
+          <button type="button" className="h-10 rounded-lg border border-gray-300 px-4 py-2 hover:bg-white" onClick={() => deleteSelectedFamilyMember()}>
             <DeleteIcon />
           </button>
         </div>
         <SalaryTextInput
           label="Családtag neve"
           name="name"
-          formState={selectedFamilyMember}
-          setFormState={setSelectedFamilyMember}
+          formState={getSelectedFamilyMember()}
+          setFormState={updateSelectedFamilyMember}
         />
         <SalaryTextInput
           label="Bruttó bér"
           name="grossSalary"
-          formState={selectedFamilyMember}
-          setFormState={setSelectedFamilyMember}
+          formState={getSelectedFamilyMember()}
+          setFormState={updateSelectedFamilyMember}
         />
         <SalarySliderInput
           min={0}
           max={1_000_000}
           step={1}
           name="grossSalary"
-          formState={selectedFamilyMember}
-          setFormState={setSelectedFamilyMember}
+          formState={getSelectedFamilyMember()}
+          setFormState={updateSelectedFamilyMember}
         />
         <div className="flex items-center justify-center justify-items-center gap-x-1">
           <SalaryButton
             percentage={-1}
             name={"grossSalary"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryButton
             percentage={-5}
             name={"grossSalary"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryButton
             percentage={1}
             name={"grossSalary"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryButton
             percentage={5}
             name={"grossSalary"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
         </div>
         <div>
@@ -84,32 +84,32 @@ const SalaryCalculator = () => {
           <SalaryCheckbox
             label={"25 év alattiak SZJA mentessége"}
             name={"isYoungAdult"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryCheckbox
             label={"Friss házasok kedvezménye"}
             name={"isMarried"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryCheckbox
             label={"Személyi adókedvezmény"}
             name={"isEligibleForTaxAllowance"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
           <SalaryCheckbox
             label={"Családi kedvezmény"}
             name={"isEligibleForFamilyTaxAllowance"}
-            formState={selectedFamilyMember}
-            setFormState={setSelectedFamilyMember}
+            formState={getSelectedFamilyMember()}
+            setFormState={updateSelectedFamilyMember}
           />
         </div>
         <div className="text-center">
           <p className="text-xl font-bold">Számított nettó bér:</p>
           <p className="inline-block w-1/4 rounded-lg border border-gray-300 px-4 py-2 text-xl font-bold">
-            {selectedFamilyMember.netSalary}
+            {getSelectedFamilyMember().netSalary}
           </p>
         </div>
       </div>
