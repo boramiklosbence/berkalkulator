@@ -35,7 +35,7 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
     <div className="flex items-center gap-x-1">
       <button
         type="button"
-        className="h-6 px-2 py-1 rounded-lg bg-blue-500 font-bold text-xs text-white hover:bg-blue-600"
+        className="h-6 rounded-lg bg-blue-500 px-2 py-1 text-xs font-bold text-white hover:bg-blue-600"
         onClick={() => handleDependentInput(1)}
       >
         <PlusIcon />
@@ -43,7 +43,7 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
       {formState.numberOfDependents}
       <button
         type="button"
-        className="h-6 px-2 py-1 rounded-lg bg-blue-500 font-bold text-xs text-white hover:bg-blue-600"
+        className="h-6 rounded-lg bg-blue-500 px-2 py-1 text-xs font-bold text-white hover:bg-blue-600"
         onClick={() => handleDependentInput(-1)}
       >
         <MinusIcon />
@@ -51,7 +51,7 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
       Eltartott, ebből kedveznényezett:
       <button
         type="button"
-        className="h-6 px-2 py-1 rounded-lg bg-blue-500 font-bold text-xs text-white hover:bg-blue-600"
+        className="h-6 rounded-lg bg-blue-500 px-2 py-1 text-xs font-bold text-white hover:bg-blue-600"
         onClick={() => handleBeneficiaryDependentInput(1)}
       >
         <PlusIcon />
@@ -59,7 +59,7 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
       {formState.numberOfBeneficiaryDependents}
       <button
         type="button"
-        className="h-6 px-2 py-1 rounded-lg bg-blue-500 font-bold text-xs text-white hover:bg-blue-600"
+        className="h-6 rounded-lg bg-blue-500 px-2 py-1 text-xs font-bold text-white hover:bg-blue-600"
         onClick={() => handleBeneficiaryDependentInput(-1)}
       >
         <MinusIcon />
