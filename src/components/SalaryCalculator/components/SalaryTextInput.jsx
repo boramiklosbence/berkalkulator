@@ -1,6 +1,6 @@
 import React from "react";
 
-const SalaryTextInput = ({ label, name, formState, setFormState }) => {
+const SalaryTextInput = ({ type, label, name, placeHolder, formState, setFormState }) => {
   const handleInput = e => {
     setFormState({
       ...formState,
@@ -14,8 +14,9 @@ const SalaryTextInput = ({ label, name, formState, setFormState }) => {
         {label}
       </label>
       <input
-        type="text"
+        type={type}
         name={name}
+        placeholder={placeHolder}
         className="block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-black focus:border-blue-500 focus:ring-blue-500"
         onInput={handleInput}
         value={formState[name]}

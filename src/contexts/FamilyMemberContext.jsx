@@ -1,16 +1,22 @@
 import React, { createContext, useContext, useState } from "react";
 
 const FamilyMemberContext = createContext();
+const useFamilyMember = () => useContext(FamilyMemberContext);
 
-const useFamilyMember = () => {
-  return useContext(FamilyMemberContext);
+const generateRandomId = () => {
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 10000);
+  return timestamp.toString() + random.toString();
 };
 
 const DEFAULT_FAMILY_MEMBER = {
-  id: 0,
+  id: generateRandomId(),
   name: "",
-  grossSalary: undefined,
-  netSalary: undefined,
+  grossSalary: 0,
+  netSalary: 0,
+  marriageDate: undefined,
+  numberOfDependents: 0,
+  numberOfBeneficiaryDependents: 0,
   isYoungAdult: false,
   isMarried: false,
   isEligibleForTaxAllowance: false,
@@ -19,34 +25,38 @@ const DEFAULT_FAMILY_MEMBER = {
 
 const FamilyMemberProvider = ({ children }) => {
   const [familyMembers, setFamilyMembers] = useState([DEFAULT_FAMILY_MEMBER]);
-  const [selectedFamilyMemberId, setSelectedFamilyMemberId] = useState(0);
+  const [selectedFamilyMemberId, setSelectedFamilyMemberId] = useState(DEFAULT_FAMILY_MEMBER.id);
 
   const addFamilyMember = () => {
-    const newFamilyMembers = [...familyMembers, DEFAULT_FAMILY_MEMBER];
-    setFamilyMembers(newFamilyMembers);
-    setSelectedFamilyMemberId(DEFAULT_FAMILY_MEMBER.id);
+    const newFamilyMemberId = generateRandomId();
+    setFamilyMembers(prevMembers => [...prevMembers, { ...DEFAULT_FAMILY_MEMBER, id: newFamilyMemberId }]);
+    setSelectedFamilyMemberId(newFamilyMemberId);
   };
 
-  const getSelectedFamilyMember = () => familyMembers.find(member => member.id === selectedFamilyMemberId);
+  const getSelectedFamilyMember = () => familyMembers.find(familyMember => familyMember.id === selectedFamilyMemberId);
 
-  const updateSelectedFamilyMember = (updatedData) => {
-    setFamilyMembers(prevMembers => {
-      return prevMembers.map(familyMember => {
-        return familyMember.id === selectedFamilyMemberId ? { ...familyMember, ...updatedData } : familyMember;
-      });
-    });
+  const updateSelectedFamilyMember = updatedData => {
+    setFamilyMembers(prevMembers =>
+      prevMembers.map(familyMember =>
+        familyMember.id === selectedFamilyMemberId ? { ...familyMember, ...updatedData } : familyMember
+      )
+    );
   };
 
   const deleteSelectedFamilyMember = () => {
-    const remainingFamilyMembers = familyMembers.filter(member => member.id !== selectedFamilyMemberId);
+    const remainingFamilyMembers = familyMembers.filter(familyMember => familyMember.id !== selectedFamilyMemberId);
     setFamilyMembers(remainingFamilyMembers.length > 0 ? remainingFamilyMembers : [DEFAULT_FAMILY_MEMBER]);
-    setSelectedFamilyMemberId(0);
+    setSelectedFamilyMemberId(
+      remainingFamilyMembers.length > 0
+        ? remainingFamilyMembers[remainingFamilyMembers.length - 1].id
+        : DEFAULT_FAMILY_MEMBER.id
+    );
   };
 
-  const value = {
+  const contextValue = {
     familyMembers,
-    setFamilyMembers,
     selectedFamilyMemberId,
+    setFamilyMembers,
     setSelectedFamilyMemberId,
     addFamilyMember,
     getSelectedFamilyMember,
@@ -54,7 +64,7 @@ const FamilyMemberProvider = ({ children }) => {
     deleteSelectedFamilyMember
   };
 
-  return <FamilyMemberContext.Provider value={value}>{children}</FamilyMemberContext.Provider>;
+  return <FamilyMemberContext.Provider value={contextValue}>{children}</FamilyMemberContext.Provider>;
 };
 
 export { FamilyMemberProvider, useFamilyMember };
