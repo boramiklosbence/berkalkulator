@@ -119,7 +119,7 @@ const SalaryCalculator = () => {
             <SalaryDependentInput formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
           )}
         </div>
-        <div className="text-center">
+        <div className="text-center mt-5">
           <p className="text-xl font-bold">Számított nettó bér:</p>
           <p className="inline-block w-1/4 rounded-lg border border-gray-300 px-4 py-2 text-xl font-bold">
             {selectedFamilyMember.netSalary}
