@@ -15,7 +15,11 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
   const handleBeneficiaryDependentInput = value => {
     let beneficiaryDependents = formState.numberOfBeneficiaryDependents + value;
 
-    if (beneficiaryDependents > formState.numberOfDependents) {
+    if (formState.numberOfDependents >= 3 && beneficiaryDependents >= 3) {
+      beneficiaryDependents = 3;
+    }
+
+    if (formState.numberOfDependents <= 3 && beneficiaryDependents > formState.numberOfDependents) {
       beneficiaryDependents = formState.numberOfDependents;
     }
 
@@ -28,8 +32,6 @@ const SalaryDependentInput = ({ formState, setFormState }) => {
       numberOfBeneficiaryDependents: beneficiaryDependents
     });
   };
-
-  console.log(setFormState);
 
   return (
     <div className="flex items-center gap-x-1">

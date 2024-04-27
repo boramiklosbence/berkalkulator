@@ -12,18 +12,56 @@ const SalaryCalculator = () => {
   const selectedFamilyMember = getSelectedFamilyMember();
 
   useEffect(() => {
-    let value = selectedFamilyMember.grossSalary;
+    const grossSalary = selectedFamilyMember.grossSalary;
+    const numberOfDependents = selectedFamilyMember.numberOfDependents;
+    const numberOfBeneficiaryDependents = selectedFamilyMember.numberOfBeneficiaryDependents;
+
+    const personalIncomeTaxRate = 0.15;
+    const socialSecurityContributionRate = 0.185;
+    const personalIncomeTax = grossSalary * personalIncomeTaxRate;
+    const socialSecurityContribution = grossSalary * socialSecurityContributionRate;
+    let totalTax = personalIncomeTax + socialSecurityContribution;
+
+    if (selectedFamilyMember.isEligibleForTaxAllowance) {
+      totalTax -= 77300;
+      totalTax = Math.max(totalTax, 0);
+    }
+
+    let familyTaxAllowance = 0;
+    if (selectedFamilyMember.isEligibleForFamilyTaxAllowance) {
+      if (numberOfBeneficiaryDependents === 1) {
+        familyTaxAllowance = 10000 * numberOfDependents;
+      }
+      if (numberOfBeneficiaryDependents === 2) {
+        familyTaxAllowance = 20000 * numberOfDependents;
+      }
+      if (numberOfBeneficiaryDependents >= 3) {
+        familyTaxAllowance = 33000 * numberOfDependents;
+      }
+    }
+
+    let actualNetSalary = grossSalary - totalTax + familyTaxAllowance;
+
+    if (selectedFamilyMember.isMarried) {
+      const isValid = true;
+
+      actualNetSalary += 5000;
+    }
+
+    actualNetSalary = Math.round(actualNetSalary);
 
     updateSelectedFamilyMember({
       ...getSelectedFamilyMember(),
-      netSalary: value
+      netSalary: actualNetSalary
     });
   }, [
     selectedFamilyMember.grossSalary,
     selectedFamilyMember.isYoungAdult,
     selectedFamilyMember.isMarried,
     selectedFamilyMember.isEligibleForTaxAllowance,
-    selectedFamilyMember.isEligibleForFamilyTaxAllowance
+    selectedFamilyMember.isEligibleForFamilyTaxAllowance,
+    selectedFamilyMember.numberOfDependents,
+    selectedFamilyMember.numberOfBeneficiaryDependents
   ]);
 
   return (
@@ -119,7 +157,7 @@ const SalaryCalculator = () => {
             <SalaryDependentInput formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
           )}
         </div>
-        <div className="text-center mt-5">
+        <div className="mt-5 text-center">
           <p className="text-xl font-bold">Számított nettó bér:</p>
           <p className="inline-block w-1/4 rounded-lg border border-gray-300 px-4 py-2 text-xl font-bold">
             {selectedFamilyMember.netSalary}

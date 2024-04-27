@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 const FamilyMemberContext = createContext();
+
 const useFamilyMember = () => useContext(FamilyMemberContext);
 
 const generateRandomId = () => {
