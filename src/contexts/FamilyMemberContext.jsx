@@ -34,6 +34,8 @@ const FamilyMemberProvider = ({ children }) => {
     setSelectedFamilyMemberId(newFamilyMemberId);
   };
 
+  const calculateTotalNetSalary = () => familyMembers.reduce((total, member) => total + parseInt(member.netSalary), 0);
+
   const getSelectedFamilyMember = () => familyMembers.find(familyMember => familyMember.id === selectedFamilyMemberId);
 
   const updateSelectedFamilyMember = updatedData => {
@@ -62,7 +64,8 @@ const FamilyMemberProvider = ({ children }) => {
     addFamilyMember,
     getSelectedFamilyMember,
     updateSelectedFamilyMember,
-    deleteSelectedFamilyMember
+    deleteSelectedFamilyMember,
+    calculateTotalNetSalary
   };
 
   return <FamilyMemberContext.Provider value={contextValue}>{children}</FamilyMemberContext.Provider>;

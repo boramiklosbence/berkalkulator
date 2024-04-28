@@ -1,7 +1,7 @@
 import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
 
 const HouseholdSummary = () => {
-  const { familyMembers } = useFamilyMember();
+  const { familyMembers, calculateTotalNetSalary } = useFamilyMember();
 
   return (
     <div className="mb-2 flex justify-center">
@@ -23,13 +23,13 @@ const HouseholdSummary = () => {
               return (
                 <tr key={index} className="border-b bg-white">
                   <td className="whitespace-nowrap px-6 py-4 font-medium">{familyMember.name}</td>
-                  <td className="px-6 py-4">{familyMember.grossSalary}</td>
+                  <td className="px-6 py-4">{familyMember.netSalary}</td>
                 </tr>
               );
             })}
             <tr className="border-b bg-white">
               <td className="whitespace-nowrap px-6 py-4 font-medium">Összesen:</td>
-              <td className="px-6 py-4">0</td>
+              <td className="px-6 py-4">{calculateTotalNetSalary()}</td>
             </tr>
           </tbody>
         </table>

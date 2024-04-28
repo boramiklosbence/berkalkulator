@@ -6,6 +6,7 @@ import SalaryCheckbox from "./components/SalaryCheckbox.jsx";
 import SalarySliderInput from "./components/SalarySliderInput.jsx";
 import SalaryTextInput from "./components/SalaryTextInput.jsx";
 import SalaryDependentInput from "./components/SalaryDependentInput.jsx";
+import SalaryMarriageDateInput from "./components/SalaryMarriageDateInput.jsx";
 
 const SalaryCalculator = () => {
   const { getSelectedFamilyMember, updateSelectedFamilyMember, deleteSelectedFamilyMember } = useFamilyMember();
@@ -141,6 +142,9 @@ const SalaryCalculator = () => {
             formState={selectedFamilyMember}
             setFormState={updateSelectedFamilyMember}
           />
+          {selectedFamilyMember.isMarried && (
+            <SalaryMarriageDateInput label={"Adja meg a házasságkötés dátumát:"} name={"marriageDate"} formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
+          )}
           <SalaryCheckbox
             label={"Személyi adókedvezmény"}
             name={"isEligibleForTaxAllowance"}
