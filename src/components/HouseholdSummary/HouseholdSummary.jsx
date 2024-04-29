@@ -1,4 +1,5 @@
-import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
+import React from "react";
+import { useFamilyMember } from "../../contexts/FamilyMemberContext";
 
 const HouseholdSummary = () => {
   const { familyMembers, calculateTotalNetSalary } = useFamilyMember();

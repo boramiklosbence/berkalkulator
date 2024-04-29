@@ -1,12 +1,12 @@
+import React, { useState, useEffect } from "react";
 import { FaTrash as DeleteIcon } from "react-icons/fa";
 import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
-import React, { useState, useEffect } from "react";
 import SalaryButton from "./components/SalaryButton.jsx";
 import SalaryCheckbox from "./components/SalaryCheckbox.jsx";
-import SalarySliderInput from "./components/SalarySliderInput.jsx";
-import SalaryTextInput from "./components/SalaryTextInput.jsx";
 import SalaryDependentInput from "./components/SalaryDependentInput.jsx";
 import SalaryMarriageDateInput from "./components/SalaryMarriageDateInput.jsx";
+import SalarySliderInput from "./components/SalarySliderInput.jsx";
+import SalaryTextInput from "./components/SalaryTextInput.jsx";
 
 const SalaryCalculator = () => {
   const { getSelectedFamilyMember, updateSelectedFamilyMember, deleteSelectedFamilyMember } = useFamilyMember();
