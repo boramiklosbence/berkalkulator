@@ -1,6 +1,6 @@
 import { FaTrash as DeleteIcon } from "react-icons/fa";
 import { useFamilyMember } from "../../contexts/FamilyMemberContext.jsx";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SalaryButton from "./components/SalaryButton.jsx";
 import SalaryCheckbox from "./components/SalaryCheckbox.jsx";
 import SalarySliderInput from "./components/SalarySliderInput.jsx";
@@ -11,6 +11,7 @@ import SalaryMarriageDateInput from "./components/SalaryMarriageDateInput.jsx";
 const SalaryCalculator = () => {
   const { getSelectedFamilyMember, updateSelectedFamilyMember, deleteSelectedFamilyMember } = useFamilyMember();
   const selectedFamilyMember = getSelectedFamilyMember();
+  const [isEligibleForMarriageBonus, setIsEligibleForMarriageBonus] = useState(false);
 
   useEffect(() => {
     const grossSalary = selectedFamilyMember.grossSalary;
@@ -44,9 +45,16 @@ const SalaryCalculator = () => {
     let actualNetSalary = grossSalary - totalTax + familyTaxAllowance;
 
     if (selectedFamilyMember.isMarried) {
-      const isValid = true;
+      const marriageDate = new Date(selectedFamilyMember?.marriageDate);
+      const currentDate = new Date();
+      const differenceInMonths = (currentDate.getFullYear() - marriageDate.getFullYear()) * 12 + (currentDate.getMonth() - marriageDate.getMonth());
 
-      actualNetSalary += 5000;
+      if (differenceInMonths <= 24) {
+        setIsEligibleForMarriageBonus(true)
+        actualNetSalary += 5000;
+      }else{
+        setIsEligibleForMarriageBonus(false)
+      }
     }
 
     actualNetSalary = Math.round(actualNetSalary);
@@ -61,6 +69,7 @@ const SalaryCalculator = () => {
     selectedFamilyMember.isMarried,
     selectedFamilyMember.isEligibleForTaxAllowance,
     selectedFamilyMember.isEligibleForFamilyTaxAllowance,
+    selectedFamilyMember.marriageDate,
     selectedFamilyMember.numberOfDependents,
     selectedFamilyMember.numberOfBeneficiaryDependents
   ]);
@@ -143,7 +152,7 @@ const SalaryCalculator = () => {
             setFormState={updateSelectedFamilyMember}
           />
           {selectedFamilyMember.isMarried && (
-            <SalaryMarriageDateInput label={"Adja meg a házasságkötés dátumát:"} name={"marriageDate"} formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
+            <SalaryMarriageDateInput label={"Adja meg a házasságkötés dátumát:"} name={"marriageDate"} isEligibleForMarriageBonus={isEligibleForMarriageBonus} formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
           )}
           <SalaryCheckbox
             label={"Személyi adókedvezmény"}
