@@ -47,13 +47,15 @@ const SalaryCalculator = () => {
     if (selectedFamilyMember.isMarried) {
       const marriageDate = new Date(selectedFamilyMember?.marriageDate);
       const currentDate = new Date();
-      const differenceInMonths = (currentDate.getFullYear() - marriageDate.getFullYear()) * 12 + (currentDate.getMonth() - marriageDate.getMonth());
+      const differenceInMonths =
+        (currentDate.getFullYear() - marriageDate.getFullYear()) * 12 +
+        (currentDate.getMonth() - marriageDate.getMonth());
 
       if (differenceInMonths <= 24) {
-        setIsEligibleForMarriageBonus(true)
+        setIsEligibleForMarriageBonus(true);
         actualNetSalary += 5000;
-      }else{
-        setIsEligibleForMarriageBonus(false)
+      } else {
+        setIsEligibleForMarriageBonus(false);
       }
     }
 
@@ -152,7 +154,13 @@ const SalaryCalculator = () => {
             setFormState={updateSelectedFamilyMember}
           />
           {selectedFamilyMember.isMarried && (
-            <SalaryMarriageDateInput label={"Adja meg a házasságkötés dátumát:"} name={"marriageDate"} isEligibleForMarriageBonus={isEligibleForMarriageBonus} formState={selectedFamilyMember} setFormState={updateSelectedFamilyMember} />
+            <SalaryMarriageDateInput
+              label={"Adja meg a házasságkötés dátumát:"}
+              name={"marriageDate"}
+              isEligibleForMarriageBonus={isEligibleForMarriageBonus}
+              formState={selectedFamilyMember}
+              setFormState={updateSelectedFamilyMember}
+            />
           )}
           <SalaryCheckbox
             label={"Személyi adókedvezmény"}
